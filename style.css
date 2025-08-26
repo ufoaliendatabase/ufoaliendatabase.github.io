@@ -8,31 +8,46 @@ body {
   font-family: 'Arial', sans-serif;
 }
 
-/* Nebula layer behind stars */
+/* Nebula layers behind stars */
 body::before, body::after {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(255,0,150,0.2), transparent 70%),
-              radial-gradient(circle at 70% 60%, rgba(0,200,255,0.15), transparent 60%),
-              radial-gradient(circle at 40% 80%, rgba(255,200,0,0.1), transparent 70%);
-  animation: drift 60s linear infinite;
+  top: -25%; left: -25%;
+  width: 150%;
+  height: 150%;
+  background: radial-gradient(circle at 30% 30%, rgba(255,0,150,0.25), transparent 65%),
+              radial-gradient(circle at 70% 60%, rgba(0,200,255,0.2), transparent 60%),
+              radial-gradient(circle at 40% 80%, rgba(255,200,0,0.15), transparent 65%);
+  animation: drift 80s linear infinite, morph 20s ease-in-out infinite alternate;
   z-index: -2;
 }
 
-/* Second layer with different motion */
 body::after {
-  background: radial-gradient(circle at 20% 70%, rgba(150,0,255,0.15), transparent 60%),
-              radial-gradient(circle at 80% 40%, rgba(0,255,180,0.1), transparent 70%);
-  animation-duration: 90s;
+  background: radial-gradient(circle at 20% 70%, rgba(150,0,255,0.2), transparent 60%),
+              radial-gradient(circle at 80% 40%, rgba(0,255,180,0.15), transparent 65%);
+  animation: drift 120s linear infinite reverse, morph 30s ease-in-out infinite alternate;
 }
 
-/* Drift animation */
+/* Slow drift */
 @keyframes drift {
   from { transform: translate(0,0) scale(1); }
-  to   { transform: translate(-20%, -20%) scale(1.2); }
+  to   { transform: translate(-15%, -15%) scale(1.15); }
+}
+
+/* Morphing colors and opacity */
+@keyframes morph {
+  0% {
+    filter: hue-rotate(0deg) brightness(1);
+    opacity: 0.4;
+  }
+  50% {
+    filter: hue-rotate(90deg) brightness(1.2);
+    opacity: 0.6;
+  }
+  100% {
+    filter: hue-rotate(180deg) brightness(1);
+    opacity: 0.4;
+  }
 }
 
 /* Star container fills screen */
